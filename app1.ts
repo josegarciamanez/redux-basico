@@ -6,10 +6,14 @@ interface Action {
 
 // Crear función reducer que recibe el estado actual y la acción
 function reducer(state = 10, action: Action) {
-  if (action.type === "INCREMENTAR") {
-    return (state += 1);
+  switch (action.type) {
+    case "INCREMENTAR":
+      return (state += 1);
+    case "DECREMENTAR":
+      return (state -= 1);
+    default:
+      return state;
   }
-  return state;
 }
 
 // Usar el reducer (enviamos el estado como primer parámetro y la acción como segundo y retornamos el estado nuevo)
@@ -17,3 +21,7 @@ const incrementadorAction: Action = {
   type: "INCREMENTAR"
 };
 console.log(reducer(10, incrementadorAction));
+const decrementadorAction: Action = {
+  type: "DECREMENTAR"
+};
+console.log(reducer(10, decrementadorAction));
